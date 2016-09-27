@@ -27,7 +27,7 @@ Article.loadAll = function(dataWePassIn) {
   });
 };
 
-/* TODO: Refactoring the Article.fetchAll method, it now accepts a parameter
+/* DONE: Refactoring the Article.fetchAll method, it now accepts a parameter
     that will execute once the loading of articles is done. We do this because
     we might want to call other view functions, and not just renderIndexPage();
     Now instead of calling articleView.renderIndexPage(), we can call
@@ -63,25 +63,36 @@ Article.getAll = function(nextFunction) {
   });
 };
 
-/* TODO: Chain together a `map` and a `reduce` call to get a rough count of
+/* DONE: Chain together a `map` and a `reduce` call to get a rough count of
     all words in all articles. */
 Article.numWordsAll = function() {
   return Article.allArticles.map(function(article) {
       //DONE: Grab the word count from each article body.
+    console.log(article.body.match(/\w+/g).length);
     return article.body.match(/\w+/g).length;
   })
-  // TODO: complete this reduce to get a grand total word count
-  .reduce(function() {
+  // DONE: complete this reduce to get a grand total word count
+  .reduce(function(acc, cur) {
+    return acc + curr;
   });
 };
 
 /* TODO: Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
 Article.allAuthors = function() {
-  //return       TODO: map our collection
-    //return    TODO: return just the author names
+  return Article.allArticles.map(function(article) {
+    return article.Author;
+  }).reduce(function(acc, curr) {
+    if (indexOf(curr) === -1) {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
 
-  /* TODO: For our `reduce` that we'll chain here -- since we are trying to
+  //DONE: map our collection
+  //DONE: return just the author names
+
+  /* DONE: For our `reduce` that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type...
       What data type should this accumulator be and where is it placed? */
 };
