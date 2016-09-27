@@ -86,6 +86,7 @@ Article.allAuthors = function() {
     if(prev.indexOf(curr) === -1){
       prev.push(curr);
     }
+    return prev;
   }, []
 );
   //return       TODO: map our collection
@@ -101,7 +102,13 @@ Article.numWordsByAuthor = function() {
       One for the author's name, and one for the total number of words across
       the matching articles written by the specified author. */
   return Article.allAuthors().map(function(author) {
-    return {
+    return {name:author, numWords: Article.allArticles.filter(function(curArticle){
+      return curArticle.author === author;
+    }).map(function(article){
+      return article.body.match(/\w+/g).length;
+    }).reduce(function(acc, curr){
+      return acc + curr;
+    })
       // name:
       // numWords: someCollection.filter(function(curArticle) {
       //  what do we return here to check for matching authors?
