@@ -1,4 +1,4 @@
-// TODO: Wrap the entire contents of this file in an IIFE.
+// DONE: Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
 function Article (opts) {
   for (key in opts) {
@@ -27,7 +27,7 @@ Article.loadAll = function(dataWePassIn) {
   });
 };
 
-/* TODO: Refactoring the Article.fetchAll method, it now accepts a parameter
+/* DONE: Refactoring the Article.fetchAll method, it now accepts a parameter
     that will execute once the loading of articles is done. We do this because
     we might want to call other view functions, and not just renderIndexPage();
     Now instead of calling articleView.renderIndexPage(), we can call
@@ -63,29 +63,36 @@ Article.getAll = function(nextFunction) {
   });
 };
 
-/* TODO: Chain together a `map` and a `reduce` call to get a rough count of
+/* DONE: Chain together a `map` and a `reduce` call to get a rough count of
     all words in all articles. */
 Article.numWordsAll = function() {
   return Article.allArticles.map(function(article) {
       //DONE: Grab the word count from each article body.
     return article.body.match(/\w+/g).length;
   })
-  // TODO: complete this reduce to get a grand total word count
+  // DONE: complete this reduce to get a grand total word count
   .reduce(function(acc, curr) {
     return acc + curr;
   });
 };
 
-/* TODO: Chain together a `map` and a `reduce` call to
+/* DONE: Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
 Article.allAuthors = function() {
-  //return       TODO: map our collection
-    //return    TODO: return just the author names
+  //return       DONE: map our collection
+    //return    DONE: return just the author names
+  var authArray = [];
   return Article.allArticles.map(function(article) {
     return article.author;
-  });
+  })
+  .reduce(function(acc,curr) {
+    if(acc.indexOf(curr) === -1) {
+      acc.push(curr);
+    }
+    return acc;
+  },authArray);
 
-  /* TODO: For our `reduce` that we'll chain here -- since we are trying to
+  /* DONE: For our `reduce` that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type...
       What data type should this accumulator be and where is it placed? */
 };
