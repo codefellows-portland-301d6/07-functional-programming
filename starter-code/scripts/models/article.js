@@ -101,20 +101,25 @@
   };
 
 
-  // Article.numWordsByAuthor = function() {
-  //   /* TODO: Transform each author element into an object with 2 properties:
-  //       One for the author's name, and one for the total number of words across
-  //       the matching articles written by the specified author. */
-  //   return Article.allAuthors().map(function(author) {
-  //     return {
-  //       // name:
-  //       // numWords: someCollection.filter(function(curArticle) {
-  //       //  what do we return here to check for matching authors?
-  //       // })
-  //       // .map(...) // use .map to return the author's word count for each article's body (hint: regexp!).
-  //       // .reduce(...) // squash this array of numbers into one big number!
-  //     };
-  //   });
-  // };
+  Article.numWordsByAuthor = function() {
+    /* TODO: Transform each author element into an object with 2 properties:
+        One for the author's name, and one for the total number of words across
+        the matching articles written by the specified author. */
+    return Article.allAuthors().map(function(author) {
+      return {
+        name: author,
+        numWords: Article.allArticles.filter(function(currentArticle){
+          return currentArticle.author === author;
+        })
+        .map(function(article) {
+            //DONE: Grab the word count from each article body.
+          return article.body.match(/\w+/g).length;
+        }) // use .map to return the author's word count for each article's body (hint: regexp!).
+        .reduce(function(acc, curr) {
+          return acc + curr;
+        }) // squash this array of numbers into one big number!
+      };
+    });
+  };
   module.Article = Article;
 })(window);
