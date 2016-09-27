@@ -1,7 +1,6 @@
 // TODO: Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
 (function(module) {
-
   function Article (opts) {
     for (key in opts) {
       this[key] = opts[key];
@@ -102,8 +101,17 @@
     /* TODO: Transform each author element into an object with 2 properties:
         One for the author's name, and one for the total number of words across
         the matching articles written by the specified author. */
+
     return Article.allAuthors().map(function(author) {
       return {
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle){
+          return curArticle.author === author;
+        }).map(function(article){
+          return article.body.match(/\w+/g).length;
+        }).reduce(function(acc, curr){
+          return acc + curr;
+        })
         // name:
         // numWords: someCollection.filter(function(curArticle) {
         //  what do we return here to check for matching authors?
@@ -113,4 +121,5 @@
       };
     });
   };
+  module.Article = Article;
 })(window);
