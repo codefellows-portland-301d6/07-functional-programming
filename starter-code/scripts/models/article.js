@@ -1,6 +1,6 @@
 // TODO: X Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
-(function(module){
+// (function(module){
 
   function Article (opts) {
     for (key in opts) {
@@ -104,13 +104,21 @@
         the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle) {
+          return author = curArticle.author;
+        }).map(function() {
+          return article.body.match(/\w+/g).length;
+        }).reduce(function(acc, curr) {
+          return acc + curr;
+        }, 0)
+      };
         // name:
         // numWords: someCollection.filter(function(curArticle) {
         //  what do we return here to check for matching authors?
         // })
         // .map(...) // use .map to return the author's word count for each article's body (hint: regexp!).
         // .reduce(...) // squash this array of numbers into one big number!
-      };
     });
   };
-}());
+// }());
