@@ -79,6 +79,13 @@ Article.numWordsAll = function() {
 /* TODO: Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
 Article.allAuthors = function() {
+  return Article.allArticles.map(function(article){
+    return article.author;
+
+  }).reduce(function(prev, curr, index, array) {
+    
+  }, []
+);
   //return       TODO: map our collection
     //return    TODO: return just the author names
 
