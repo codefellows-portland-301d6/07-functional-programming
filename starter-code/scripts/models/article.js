@@ -69,15 +69,24 @@ Article.numWordsAll = function() {
   return Article.allArticles.map(function(article) {
       //DONE: Grab the word count from each article body.
     return article.body.match(/\w+/g).length;
-  })
+  });
   // TODO: complete this reduce to get a grand total word count
-  .reduce(function() {
+  Article.allArticles.reduce(function(acc, curr) {
+    return acc + curr;
   });
 };
 
 /* TODO: Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
 Article.allAuthors = function() {
+  var uniqueAuthors = Article.allArticles.map(function(obj) {
+    return obj.author;
+  }).reduce(function(acc, curr){
+    if(acc.indexOf(curr) === -1) {
+      acc[acc.length] = curr;
+    }
+    return acc;
+  }, []);
   //return       TODO: map our collection
     //return    TODO: return just the author names
 
