@@ -88,8 +88,9 @@ Article.allAuthors = function() {
 
 Article.numWordsByAuthor = function() {
   /* TODO: Transform each author element into an object with 2 properties:
-      One for the author's name, and one for the total number of words across
-      the matching articles written by the specified author. */
+      One - the author's name, and
+      Two - the total number of words across the matching articles
+            written by the specified author. */
   return Article.allAuthors().map(function(author) {
     return {
       // name:
