@@ -71,13 +71,24 @@ Article.numWordsAll = function() {
     return article.body.match(/\w+/g).length;
   })
   // TODO: complete this reduce to get a grand total word count
-  .reduce(function() {
+  .reduce(function(acc, curr) {
+    return acc + curr;
   });
 };
 
 /* TODO: Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
 Article.allAuthors = function() {
+  return Article.allArticles.map(function(article){
+    return article.author;
+
+  }).reduce(function(prev, curr) {
+    if(prev.indexOf(curr) === -1){
+      prev.push(curr);
+    }
+    return prev;
+  }, []
+);
   //return       TODO: map our collection
     //return    TODO: return just the author names
 
@@ -91,7 +102,13 @@ Article.numWordsByAuthor = function() {
       One for the author's name, and one for the total number of words across
       the matching articles written by the specified author. */
   return Article.allAuthors().map(function(author) {
-    return {
+    return {name:author, numWords: Article.allArticles.filter(function(curArticle){
+      return curArticle.author === author;
+    }).map(function(article){
+      return article.body.match(/\w+/g).length;
+    }).reduce(function(acc, curr){
+      return acc + curr;
+    })
       // name:
       // numWords: someCollection.filter(function(curArticle) {
       //  what do we return here to check for matching authors?
