@@ -71,7 +71,8 @@ Article.numWordsAll = function() {
     return article.body.match(/\w+/g).length;
   })
   // TODO: complete this reduce to get a grand total word count
-  .reduce(function() {
+  .reduce(function(acc, curr) {
+    return acc + curr;
   });
 };
 
