@@ -83,10 +83,19 @@
   Article.allAuthors = function() {
     //return       TODO: map our collection
       //return    TODO: return just the author names
-
-    /* TODO: For our `reduce` that we'll chain here -- since we are trying to
-        return an array, we'll need to specify an accumulator type...
-        What data type should this accumulator be and where is it placed? */
+    return Article.allArticles.map(function(article) {
+      return article.author;
+    })
+  /* TODO: For our `reduce` that we'll chain here -- since we are trying to
+      return an array, we'll need to specify an accumulator type...
+      What data type should this accumulator be and where is it placed? */
+      .reduce(function(prev, curr) {
+        if (prev.indexOf(curr) === -1) {
+          prev.push(curr);
+        };
+        return prev;
+      },
+    []);
   };
 
   Article.numWordsByAuthor = function() {
