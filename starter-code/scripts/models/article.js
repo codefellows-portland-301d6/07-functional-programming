@@ -82,8 +82,10 @@ Article.allAuthors = function() {
   return Article.allArticles.map(function(article){
     return article.author;
 
-  }).reduce(function(prev, curr, index, array) {
-    
+  }).reduce(function(prev, curr) {
+    if(prev.indexOf(curr) === -1){
+      prev.push(curr);
+    }
   }, []
 );
   //return       TODO: map our collection
