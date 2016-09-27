@@ -82,7 +82,7 @@
             produce an array of *unique* author names. */
   Article.allAuthors = function() {
     //return       TODO: map our collection
-    return Article.allAuthors.map(function(article) {
+    return Article.allArticles.map(function(article) {
 
       //return    TODO: return just the author names
       return article.author;
