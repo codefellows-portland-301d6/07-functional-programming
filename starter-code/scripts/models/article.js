@@ -1,6 +1,6 @@
 // TODO: X Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
-// (function(module){
+(function(module){
 
   function Article (opts) {
     for (key in opts) {
@@ -82,20 +82,19 @@
   /* TODO: Chain together a `map` and a `reduce` call to
             produce an array of *unique* author names. */
   Article.allAuthors = function() {
-    var authorArray =[];
     //return       TODO: map our collection
-    return Article.allAuthors.map(function(article){
+    return Article.allArticles.map(function(article){
       return article.author;
-    }).reduce(function(authorArray){
-      if (authorArray.indexOf(this) === -1)
-        return authorArray.push(this);
-    }
-  );
+    }).reduce(function(prev, cur){
+      if (prev.indexOf(cur) === -1) {
+        prev.push(cur);
+      }
+      return prev;
+    }, []);
       //return    TODO: X return just the author name
     /* TODO: X For our `reduce` that we'll chain here -- since we are trying to
         return an array, we'll need to specify an accumulator type...
       What data type should this accumulator be and where is it placed? */
-    return authorArray;
   };
 
   Article.numWordsByAuthor = function() {
@@ -106,9 +105,9 @@
       return {
         name: author,
         numWords: Article.allArticles.filter(function(curArticle) {
-          return author = curArticle.author;
-        }).map(function() {
-          return article.body.match(/\w+/g).length;
+          return author === curArticle.author;
+        }).map(function(curArticle) {
+          return curArticle.body.match(/\w+/g).length;
         }).reduce(function(acc, curr) {
           return acc + curr;
         }, 0)
@@ -121,4 +120,5 @@
         // .reduce(...) // squash this array of numbers into one big number!
     });
   };
-// }());
+  module.Article = Article;
+}(window));
